@@ -5,8 +5,7 @@ This repo contains two CMake projects, `project-a` and `project-b`.
 Run `make project-a` to build `project-a` in `build/project-a` and install it
 to `install/project-a`.
 
-Run `make project-b` to build `project-b` in `build/project-b` and install it
-to `install/project-b`.
+Run `make project-b` to build `project-b` in `build/project-b`.
 
 The idea is that `project-a` produces three binaries `HelloJupiter`,
 `HelloMoon`, `HelloWorld` and installs them to `install/project-a/bin`.
