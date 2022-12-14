@@ -6,6 +6,7 @@ find_package(MyProject 3.0.1 EXACT)
 
 get_target_property(HELLO_JUPITER_PATH
   MyProjectNamespace::HelloJupiter
-  IMPORTED_LOCATION_NOCONFIG) # TODO(kwk): Figure out why it is _NOCONFIG
+  # _RELWITHDEBINFO is used because project-a was built and installed in that mode
+  IMPORTED_LOCATION_RELWITHDEBINFO)
 
 message(STATUS "Path to HelloJupiter is ${HELLO_JUPITER_PATH}")

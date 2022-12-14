@@ -8,6 +8,7 @@ project-a:
 	cd build/project-a \
 	&& cmake \
 		../../project-a \
+		-DCMAKE_BUILD_TYPE=RelWithDebInfo \
 		-DCMAKE_INSTALL_PREFIX=../../install/project-a \
 	&& make \
 	&& make install
@@ -19,6 +20,7 @@ project-b:
 	cd build/project-b \
 	&& cmake \
 		../../project-b \
+		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_PREFIX_PATH=../install/project-a/cmake \
 		-DCMAKE_INSTALL_PREFIX=../install/project-b \
 	&& make
