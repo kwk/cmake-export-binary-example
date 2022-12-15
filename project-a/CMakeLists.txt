@@ -9,7 +9,11 @@ add_executable(HelloWorld src/helloworld.cpp)
 
 # Install the binaries
 install(
-  TARGETS HelloJupiter HelloMoon HelloWorld EXPORT MyCustomExportName)
+  TARGETS
+    HelloJupiter
+    HelloMoon
+    HelloWorld
+  EXPORT MyCustomExportName)
 
 # Install the cmake config file
 install(
