@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(project-a VERSION 3.0.1)
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+  set(SUBPROJECT_A_BUILT_STANDALONE TRUE)
+  project(subproject-a VERSION 3.0.1)
+endif()
+
+message(STATUS "SUBPROJECT_A_BUILT_STANDALONE=${SUBPROJECT_A_BUILT_STANDALONE}")
 
 # Add three executables
 add_executable(HelloJupiter src/hellojupiter.cpp)
@@ -18,13 +23,9 @@ install(
 # Install the cmake config file
 install(
   EXPORT MyCustomExportName
-  NAMESPACE MyProjectNamespace::
-  FILE MyProjectConfig.cmake
-  DESTINATION "${CMAKE_INSTALL_PREFIX}/cmake")
-
-install(
-  EXPORT MyCustomExportName
-  NAMESPACE MyProjectNamespace::
+  # We can't have a namespace because that would require us to drop when we
+  # build using "build-tree" mode
+  # NAMESPACE MyProjectNamespace::
   FILE MyProjectConfig.cmake
   DESTINATION "${CMAKE_INSTALL_PREFIX}/cmake")
 

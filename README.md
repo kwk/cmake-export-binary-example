@@ -1,25 +1,44 @@
 # About
 
-This repo contains two CMake projects, `project-a` and `project-b`.
+This repo contains three CMake projects, `subproject-a` and `subproject-b` and
+`superproject`.
 
-Run `make project-a` to build `project-a` in `build/project-a` and install it
-to `install/project-a`.
+`subproject-a` produces three binaries `HelloJupiter`, `HelloMoon`, and
+`HelloWorld`.
 
-Run `make project-b` to build `project-b` in `build/project-b`.
+`superproject` uses `add_subdirectory(../subproject-a)` to build `subproject-a`
+in the same build tree.
 
-The idea is that `project-a` produces three binaries `HelloJupiter`,
-`HelloMoon`, `HelloWorld` and installs them to `install/project-a/bin`.
+`subproject-b` requires you to firsr build `subproject-a` and have it installed.
+It then tries to find the project by using `find_package`.
 
-Then `project-b` is supposed to find these binaries using `find_package`.
+This simulates these two usages of `subproject-a`
+
+1. from the same build-tree
+2. from an installed location. 
+
+## Usage
+
+Run `make subproject-a` to build `subproject-a` in `build/subproject-a` and
+install it to `install/subproject-a`.
+
+Run `make subproject-b` to build `subproject-b` in `build/subproject-b`.
+
+Run `make superproject` to build `superproject` and `subproject-a` as a direct
+dependency in `build/superproject`.
 
 ## Experiments
 
-* Build `project-a` and remove a binary from the installation folder. Notice
-  how cmake complains when building `project-b`.
-* Go to `project-b` and modify the `find_package` call to search for a higher
-  version than `3.0.1`. Try to build `project-b`. Notice how the configuration
+* Build `subproject-a` and remove a binary from the installation folder. Notice
+  how cmake complains when building `subproject-b`.
+* Go to `subproject-b` and modify the `find_package` call to search for a higher
+  version than `3.0.1`. Try to build `subproject-b`. Notice how the configuration
   file is not accepted because the version doesn't match.
 
 ## Documentation
 
 https://cmake.org/cmake/help/latest/guide/importing-exporting/index.html
+
+## See also
+
+https://discourse.llvm.org/t/an-opinionated-way-to-outsource-simplify-and-unify-repetitive-cmake-code-in-standalone-build-mode/
