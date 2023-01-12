@@ -9,8 +9,6 @@ This repo contains three CMake projects:
  2. `subproject-b`
  3. `subproject-c`.
 
-## subproject-a
-
 `subproject-a` produces three binaries `HelloJupiter`, `HelloMoon`, and
 `HelloWorld`. 
 
