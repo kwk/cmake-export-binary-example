@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(subproject-b VERSION 0.0.2)
+project(subproject-c VERSION 0.0.4)
 
 find_package(SubProjectA 3.0.1 EXACT REQUIRED HINTS "${MY_CMAKE_DIR}")
 

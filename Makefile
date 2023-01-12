@@ -1,3 +1,6 @@
+.PHONY: all
+all: clean subproject-a subproject-b subproject-c
+
 .PHONY: subproject-a
 subproject-a:
 	rm -rf build/subproject-a install/subproject-a
@@ -6,7 +9,7 @@ subproject-a:
 	&& cmake \
 		../../subproject-a \
 		-DCMAKE_BUILD_TYPE=RelWithDebInfo \
-		-DCMAKE_INSTALL_PREFIX=../../install/subproject-a \
+		-DCMAKE_INSTALL_PREFIX=$(abspath install/subproject-a) \
 	&& make \
 	&& make install
 
@@ -18,18 +21,18 @@ subproject-b:
 	&& cmake \
 		../../subproject-b \
 		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_PREFIX_PATH=../install/subproject-a/cmake \
-		-DCMAKE_INSTALL_PREFIX=../install/subproject-b \
+		-DMY_CMAKE_DIR=$(abspath install/subproject-a/cmake) \
 	&& make
 
-.PHONY: superproject
-superproject:
-	rm -rf build/superproject install/superproject
-	mkdir -pv build/superproject
-	cd build/superproject \
+.PHONY: subproject-c
+subproject-c:
+	rm -rf build/subproject-c install/subproject-c
+	mkdir -pv build/subproject-c
+	cd build/subproject-c \
 	&& cmake \
-		../../superproject \
-		-DCMAKE_BUILD_TYPE=Release \
+		../../subproject-c \
+		-DCMAKE_BUILD_TYPE=Debug \
+		-DMY_CMAKE_DIR=$(abspath build/subproject-a) \
 	&& make
 
 .PHONY: clean
